@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md text-center">
+        <h1 class="text-3xl font-bold mb-4 text-yellow-400">🎉 Number Guessing Game 🎉</h1>
+        <p class="text-lg mb-6 text-gray-300">
+            You have <span class="font-semibold text-yellow-300">6 chances</span> to guess the number between <span class="font-semibold text-yellow-300">1 and 100</span>.
+        </p>
+        <form action="{% url 'make_guess' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-lg transition duration-200">
+                Start Playing
+            </button>
+        </form>
+    </div>
+</body>
+</html>

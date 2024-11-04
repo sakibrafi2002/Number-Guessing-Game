@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Play</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md text-center">
+        <h1 class="text-3xl font-bold mb-4 text-yellow-400">🔍 Guess a Number</h1>
+
+        <!-- Display result message -->
+        <p class="text-lg mb-6 text-gray-300">{{ result }}</p>
+
+        {% if not game_over %}
+            <!-- Form for user to make a guess -->
+            <form method="post" action="{% url 'make_guess' %}" class="mb-4">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="guess" class="block text-lg mb-2 font-semibold text-gray-200">
+                        Enter your guess:
+                    </label>
+                    <input 
+                        type="number" 
+                        id="guess" 
+                        name="guess" 
+                        min="1" 
+                        max="100" 
+                        required
+                        class="w-full px-4 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    >
+                </div>
+                <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-lg transition duration-200">
+                    Guess
+                </button>
+            </form>
+
+            <!-- Attempts left -->
+            <p class="text-gray-400">Attempts left: <span class="font-semibold text-yellow-300">{{ attempts_left }}</span></p>
+        {% else %}
+            <!-- Play again link if game is over -->
+            <a href="{% url 'start_game' %}" class="inline-block mt-6 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-lg transition duration-200">
+                Play Again
+            </a>
+        {% endif %}
+    </div>
+</body>
+</html>
